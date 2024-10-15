@@ -6,12 +6,12 @@ public class EventSimulator {
     // лев поспал +10 энергии
     // лев охотился безрезультатно - 15 энергии
     // лев танцевал с Тимоном и Пумбой  + 5 к здоровью, - 5 энергии
-    // лев поймал рыбу + 10 к здоровью, - 6 энергии
-    // лев поймал антилопу + 20 к здоровью, - 10 энергии
-    // лев поймал жирафа + 22 к здоровью, - 12 энергии
-    // лев поел с Тимоном и Пумбой жуков + 5 к здоровью, - 2 энергии
-    // лев поймал буйвола + 25 к здоровью, - 12 энергии
-    // лев поймал зебру + 20 к здоровью, - 12 энергии
+    // лев поймал рыбу + fangs * 4 к здоровью, - 6 энергии
+    // лев поймал антилопу + fangs * 7 к здоровью, - 10 энергии
+    // лев поймал жирафа + fangs * 9 к здоровью, - 12 энергии
+    // лев поел с Тимоном и Пумбой жуков + fangs к здоровью, - 2 энергии
+    // лев поймал буйвола fangs * 10 к здоровью, - 12 энергии
+    // лев поймал зебру fangs * 8 к здоровью, - 12 энергии
     // на льва напал Шрам - 30 здоровье
     // лев убегал от гиен - 20 энергии
 
@@ -44,63 +44,63 @@ public class EventSimulator {
     }
 
     private void eatFish(Lion lion){
-        int health = lion.getHealth() + 10;
+        int health = lion.getHealth() + (int) lion.getFangs()*4;
         int energy = lion.getEnergy() - 6;
         reduceValue(health);
         reduceValue(energy);
         lion.setEnergy(health);
         lion.setEnergy(energy);
-        System.out.println("Лев поймал и съел рыбу. + 10 здоровье, - 6 энергии");
+        System.out.println("Лев поймал и съел рыбу. + " + health + " здоровье, - 6 энергии");
     }
 
     private void eatAntilope(Lion lion) {
-        int health = lion.getHealth() + 20;
+        int health = lion.getHealth() +  (int) lion.getFangs()*7;
         int energy = lion.getEnergy() - 10;
         reduceValue(health);
         reduceValue(energy);
         lion.setEnergy(health);
         lion.setEnergy(energy);
-        System.out.println("Лев поймал и съел антилопу. + 20 здоровье, - 10 энергии");
+        System.out.println("Лев поймал и съел антилопу. + " + health + " здоровье, - 10 энергии");
     }
 
     private void eatGiraffe (Lion lion) {
-        int health = lion.getHealth() + 22;
+        int health = lion.getHealth() + (int) lion.getFangs()*9;
         int energy = lion.getEnergy() - 12;
         reduceValue(health);
         reduceValue(energy);
         lion.setEnergy(health);
         lion.setEnergy(energy);
-        System.out.println("Лев поймал и съел жирафа. + 22 здоровье, - 12 энергии");
+        System.out.println("Лев поймал и съел жирафа. + " + health + " здоровье, - 12 энергии");
     }
 
     private void eatBugs (Lion lion) {
-        int health = lion.getHealth () + 5;
+        int health = lion.getHealth () + (int) lion.getFangs();
         int energy = lion.getEnergy() - 2;
         reduceValue(health);
         reduceValue(energy);
         lion.setEnergy(health);
         lion.setEnergy(energy);
-        System.out.println("Лев вместе с Тимоном и Пумбой ел жуков. + 5 здоровье, - 2 энергии");
+        System.out.println("Лев вместе с Тимоном и Пумбой ел жуков. + " + health + " здоровье, - 2 энергии");
     }
 
     private void eatBuffalo(Lion lion) {
-        int health = lion.getHealth() + 25;
+        int health = lion.getHealth() + (int) lion.getFangs()*10;
         int energy = lion.getEnergy() - 12;
         reduceValue(health);
         reduceValue(energy);
         lion.setHealth(health);
         lion.setEnergy(energy);
-        System.out.println("Лев поймал и съел буйвола. + 25 здоровье, - 12 энергии");
+        System.out.println("Лев поймал и съел буйвола. +" + health + " здоровье, - 12 энергии");
     }
 
     private void eatZebra(Lion lion) {
-        int health = lion.getHealth() + 25;
+        int health = lion.getHealth() + (int) lion.getFangs()*8;
         int energy = lion.getEnergy() - 12;
         reduceValue(health);
         reduceValue(energy);
         lion.setHealth(health);
         lion.setEnergy(energy);
-        System.out.println("Лев поймал и съел буйвола. + 20 здоровье, - 12 энергии");
+        System.out.println("Лев поймал и съел буйвола. +" + health + " здоровье, - 12 энергии");
     }
 
     private void attackShram(Lion lion){
