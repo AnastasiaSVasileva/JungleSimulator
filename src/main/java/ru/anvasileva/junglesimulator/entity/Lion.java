@@ -4,6 +4,7 @@ public class Lion {
     private int health = 100;
     private int energy = 100;
     private final double fangs = 2.5;
+    private int valueBalanced;
 
     public void setHealth(int health) {
         this.health = health;
@@ -24,4 +25,15 @@ public class Lion {
     public double getFangs () {
         return this.fangs;
     }
+
+    public int balanceValue(int value) {
+        if ( value < 0 ) {
+            this.valueBalanced = 0;
+        } else if ( value  > 100) {
+            this.valueBalanced = 100;
+        } else this.valueBalanced = value;
+        return this.valueBalanced;
+    }
+
 }
+
