@@ -11,8 +11,8 @@ public class EventSimulator {
     // 5 % // лев поел с Тимоном и Пумбой жуков + fangs к здоровью, - 2 энергии
     // 10 % // лев поймал буйвола fangs * 10 к здоровью, - 20 энергии
     // 2 % // лев поймал зебру fangs * 8 к здоровью, - 20 энергии
-    // 7 % // на льва напал Шрам - 50 здоровье
-    // 10 % // лев убегал от гиен - 45 энергии
+    // 7 % // на льва напал Шрам - 60 здоровье
+    // 10 % // лев убегал от гиен - 55 энергии
 
     public void activateEvent(Lion lion) {
         while (checkStatus(lion)) {
@@ -130,19 +130,19 @@ public class EventSimulator {
     }
 
     private void attackShram(Lion lion) {
-        int health = lion.getHealth() - 50;
+        int health = lion.getHealth() - 60;
         int healthBalanced = lion.balanceValue(health);
         lion.setHealth(healthBalanced);
         checkEnergy(lion);
-        System.out.println("Льва аттаковал Шрам. - 30 здоровья");
+        System.out.println("Льва аттаковал Шрам. - 60 здоровья");
     }
 
     private void runFromHyenas(Lion lion) {
-        int energy = lion.getEnergy() - 45;
+        int energy = lion.getEnergy() - 55;
         int energyBalanced = lion.balanceValue(energy);
         lion.setEnergy(energyBalanced);
         checkEnergy(lion);
-        System.out.println("Лев убегал от гиен. - 35 энергии");
+        System.out.println("Лев убегал от гиен. - 55 энергии");
     }
 
     // true - Лев жив, false - Лев ушел на радугу
