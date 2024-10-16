@@ -3,39 +3,39 @@ package ru.anvasileva.junglesimulator.util;
 import ru.anvasileva.junglesimulator.entity.Lion;
 
 public class EventSimulator {
-    // 30% // лев поспал +10 энергии
-    // 5 % // лев охотился безрезультатно - 15 энергии
-    // 10 % // лев танцевал с Тимоном и Пумбой  + 5 к здоровью, - 5 энергии
-    // 10 % // лев поймал рыбу + fangs * 4 к здоровью, - 6 энергии
-    // 15 % // лев поймал антилопу + fangs * 7 к здоровью, - 10 энергии
+    // 20 % // лев поспал +10 энергии
+    // 22 % // лев охотился безрезультатно - 25 энергии
+    // 3 % // лев танцевал с Тимоном и Пумбой  + 1 к здоровью, - 10 энергии
+    // 10 % // лев поймал рыбу + fangs * 4 к здоровью, - 15 энергии
+    // 11 % // лев поймал антилопу + fangs * 7 к здоровью, - 20 энергии
     // 5 % // лев поел с Тимоном и Пумбой жуков + fangs к здоровью, - 2 энергии
-    // 10 % // лев поймал буйвола fangs * 10 к здоровью, - 12 энергии
-    // 5 % // лев поймал зебру fangs * 8 к здоровью, - 12 энергии
-    // 3 % // на льва напал Шрам - 30 здоровье
-    // 7 % // лев убегал от гиен - 20 энергии
+    // 10 % // лев поймал буйвола fangs * 10 к здоровью, - 20 энергии
+    // 2 % // лев поймал зебру fangs * 8 к здоровью, - 20 энергии
+    // 7 % // на льва напал Шрам - 50 здоровье
+    // 10 % // лев убегал от гиен - 45 энергии
 
-    public void activateEvent(Lion lion){
+    public void activateEvent(Lion lion) {
         while (checkStatus(lion)) {
             int eventNumber = (int) (Math.random() * 100);
-            if (eventNumber >= 0 && eventNumber <= 30) {
+            if (eventNumber >= 0 && eventNumber <= 20) {
                 sleep(lion);
-            } else if (eventNumber > 30 && eventNumber <= 35) {
+            } else if (eventNumber > 20 && eventNumber <= 42) {
                 hunt(lion);
-            } else if (eventNumber > 35 && eventNumber <= 45) {
+            } else if (eventNumber > 42 && eventNumber <= 45) {
                 dance(lion);
             } else if (eventNumber > 45 && eventNumber <= 55) {
                 eatFish(lion);
-            } else if (eventNumber > 55 && eventNumber <= 70) {
+            } else if (eventNumber > 55 && eventNumber <= 66) {
                 eatAntilope(lion);
-            } else if (eventNumber >70 && eventNumber <= 75) {
+            } else if (eventNumber > 66 && eventNumber <= 71) {
                 eatBugs(lion);
-            } else if (eventNumber > 75 && eventNumber <= 85) {
+            } else if (eventNumber > 71 && eventNumber <= 81) {
                 eatBuffalo(lion);
-            } else if (eventNumber >85 && eventNumber <= 90) {
+            } else if (eventNumber > 81 && eventNumber <= 83) {
                 eatZebra(lion);
-            } else if (eventNumber > 90 && eventNumber <= 93) {
+            } else if (eventNumber > 83 && eventNumber <= 90) {
                 attackShram(lion);
-            } else if (eventNumber > 93 && eventNumber <= 100) {
+            } else if (eventNumber > 90 && eventNumber <= 100) {
                 runFromHyenas(lion);
             }
             try {
@@ -47,117 +47,119 @@ public class EventSimulator {
         System.out.println("Наш лев умер. Плачем");
     }
 
-    private void sleep(Lion lion){
+    private void sleep(Lion lion) {
         int energy = lion.getEnergy() + 10;
-        lion.balanceValue(energy);
-        lion.setEnergy(energy);
-        System.out.println ("Лев поспал + 10 энергии");
+        int energyBalanced = lion.balanceValue(energy);
+        lion.setEnergy(energyBalanced);
+        System.out.println("Лев поспал + 10 энергии");
         checkEnergy(lion);
     }
 
-    private void hunt(Lion lion){
+    private void hunt(Lion lion) {
+        int energy = lion.getEnergy() - 25;
+        int energyBalanced = lion.balanceValue(energy);
+        lion.setEnergy(energyBalanced);
+        checkEnergy(lion);
+        System.out.println("Лев охотился и ничего не поймал. - 25 энергии");
+    }
+
+    private void dance(Lion lion) {
+        int health = lion.getHealth() + 1;
+        int energy = lion.getEnergy() - 10;
+        int healthBalanced = lion.balanceValue(health);
+        int energyBalanced = lion.balanceValue(energy);
+        lion.setHealth(healthBalanced);
+        lion.setEnergy(energyBalanced);
+        checkEnergy(lion);
+        System.out.println("Лев танцевал с Тимоном и Пумбой. + 1 здоровье, - 10 энергии");
+    }
+
+    private void eatFish(Lion lion) {
+        int health = lion.getHealth() + (int) (lion.getFangs() * 4);
         int energy = lion.getEnergy() - 15;
-        lion.balanceValue(energy);
-        lion.setEnergy(energy);
+        int healthBalanced = lion.balanceValue(health);
+        int energyBalanced = lion.balanceValue(energy);
+        lion.setHealth(healthBalanced);
+        lion.setEnergy(energyBalanced);
         checkEnergy(lion);
-        System.out.println ("Лев охотился и ничего не поймал. - 15 энергии");
-    }
-
-    private void dance(Lion lion){
-        int health = lion.getHealth() + 5;
-        int energy = lion.getEnergy() - 5;
-        lion.balanceValue(health);
-        lion.balanceValue(energy);
-        lion.setEnergy(health);
-        lion.setEnergy(energy);
-        checkEnergy(lion);
-        System.out.println("Лев танцевал с Тимоном и Пумбой. + 5 здоровье, - 5 энергии");
-    }
-
-    private void eatFish(Lion lion){
-        int health = lion.getHealth() + ((int) lion.getFangs()*4);
-        int energy = lion.getEnergy() - 6;
-        lion.balanceValue(health);
-        lion.balanceValue(energy);
-        lion.setEnergy(health);
-        lion.setEnergy(energy);
-        checkEnergy(lion);
-        System.out.println("Лев поймал и съел рыбу. + " + ((int) lion.getFangs()*4) + " здоровье, - 6 энергии");
+        System.out.println("Лев поймал и съел рыбу. + " + (int) (lion.getFangs() * 4) + " здоровье, - 15 энергии");
     }
 
     private void eatAntilope(Lion lion) {
-        int health = lion.getHealth() +  ((int) lion.getFangs()*7);
-        int energy = lion.getEnergy() - 10;
-        lion.balanceValue(health);
-        lion.balanceValue(energy);
-        lion.setEnergy(health);
-        lion.setEnergy(energy);
+        int health = lion.getHealth() + (int) (lion.getFangs() * 7);
+        int energy = lion.getEnergy() - 20;
+        int healthBalanced = lion.balanceValue(health);
+        int energyBalanced = lion.balanceValue(energy);
+        lion.setHealth(healthBalanced);
+        lion.setEnergy(energyBalanced);
         checkEnergy(lion);
-        System.out.println("Лев поймал и съел антилопу. + " + ((int) lion.getFangs()*7) + " здоровье, - 10 энергии");
+        System.out.println("Лев поймал и съел антилопу. + " + (int) (lion.getFangs() * 7) + " здоровье, - 20 энергии");
     }
 
-    private void eatBugs (Lion lion) {
-        int health = lion.getHealth () + ((int) lion.getFangs());
+    private void eatBugs(Lion lion) {
+        int health = lion.getHealth() + (int) (lion.getFangs());
         int energy = lion.getEnergy() - 2;
-        lion.balanceValue(health);
-        lion.balanceValue(energy);
-        lion.setEnergy(health);
-        lion.setEnergy(energy);
+        int healthBalanced = lion.balanceValue(health);
+        int energyBalanced = lion.balanceValue(energy);
+        lion.setHealth(healthBalanced);
+        lion.setEnergy(energyBalanced);
         checkEnergy(lion);
-        System.out.println("Лев вместе с Тимоном и Пумбой ел жуков. + " + ((int) lion.getFangs()) + " здоровье, - 2 энергии");
+        System.out.println("Лев вместе с Тимоном и Пумбой ел жуков. + " + (int) (lion.getFangs()) + " здоровье, - 2 энергии");
     }
 
     private void eatBuffalo(Lion lion) {
-        int health = lion.getHealth() + ((int) lion.getFangs()*10);
-        int energy = lion.getEnergy() - 12;
-        lion.balanceValue(health);
-        lion.balanceValue(energy);
-        lion.setHealth(health);
-        lion.setEnergy(energy);
+        int health = lion.getHealth() + (int) (lion.getFangs() * 10);
+        int energy = lion.getEnergy() - 20;
+        int healthBalanced = lion.balanceValue(health);
+        int energyBalanced = lion.balanceValue(energy);
+        lion.setHealth(healthBalanced);
+        lion.setEnergy(energyBalanced);
         checkEnergy(lion);
-        System.out.println("Лев поймал и съел буйвола. +" + ((int) lion.getFangs()*10) + " здоровье, - 12 энергии");
+        System.out.println("Лев поймал и съел буйвола. + " + (int) (lion.getFangs() * 10) + " здоровье, - 20 энергии");
     }
 
     private void eatZebra(Lion lion) {
-        int health = lion.getHealth() + ((int) lion.getFangs()*8);
-        int energy = lion.getEnergy() - 12;
-        lion.balanceValue(health);
-        lion.balanceValue(energy);
-        lion.setHealth(health);
-        lion.setEnergy(energy);
+        int health = lion.getHealth() + (int) (lion.getFangs() * 8);
+        int energy = lion.getEnergy() - 20;
+        int healthBalanced = lion.balanceValue(health);
+        int energyBalanced = lion.balanceValue(energy);
+        lion.setHealth(healthBalanced);
+        lion.setEnergy(energyBalanced);
         checkEnergy(lion);
-        System.out.println("Лев поймал и съел буйвола. +" + ((int) lion.getFangs()*8) + " здоровье, - 12 энергии");
+        System.out.println("Лев поймал и съел буйвола. +" + (int) (lion.getFangs() * 8) + " здоровье, - 20 энергии");
     }
 
-    private void attackShram(Lion lion){
-        int health = lion.getHealth() - 30;
-        lion.setHealth(health);
+    private void attackShram(Lion lion) {
+        int health = lion.getHealth() - 50;
+        int healthBalanced = lion.balanceValue(health);
+        lion.setHealth(healthBalanced);
         checkEnergy(lion);
         System.out.println("Льва аттаковал Шрам. - 30 здоровья");
     }
 
-    private void runFromHyenas(Lion lion){
-        int energy = lion.getEnergy() - 20;
-        lion.setEnergy(energy);
+    private void runFromHyenas(Lion lion) {
+        int energy = lion.getEnergy() - 45;
+        int energyBalanced = lion.balanceValue(energy);
+        lion.setEnergy(energyBalanced);
         checkEnergy(lion);
-        System.out.println("Лев убегал от гиен. - 20 энергии");
+        System.out.println("Лев убегал от гиен. - 35 энергии");
     }
 
     // true - Лев жив, false - Лев ушел на радугу
-    private boolean checkStatus (Lion lion){
+    private boolean checkStatus(Lion lion) {
         System.out.println("Здоровье: " + lion.getHealth() + ". Энергия: " + lion.getEnergy());
         if (lion.getHealth() <= 0) {
-           return false;
+            return false;
         } else {
             return true;
         }
     }
 
     private void checkEnergy(Lion lion) {
-        if (lion.getEnergy() <= 0 ) {
+        if (lion.getEnergy() <= 0) {
             int health = lion.getHealth() - 5;
-            lion.balanceValue(health);
-            lion.setHealth(health);
+            int healthBalanced = lion.balanceValue(health);
+            lion.setHealth(healthBalanced);
         }
     }
 }
