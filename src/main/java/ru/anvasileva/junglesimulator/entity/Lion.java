@@ -10,26 +10,26 @@ public class Lion {
         this.health = health;
     }
 
-    public int getHealth(){
+    public int getHealth() {
         return this.health;
     }
 
-    public void setEnergy (int energy){
+    public void setEnergy(int energy) {
         this.energy = energy;
     }
 
-    public int getEnergy (){
+    public int getEnergy() {
         return this.energy;
     }
 
-    public double getFangs () {
+    public double getFangs() {
         return this.fangs;
     }
 
     public int balanceValue(int value) {
-        if ( value < 0 ) {
+        if (value < 0) {
             this.valueBalanced = 0;
-        } else if ( value  > 100) {
+        } else if (value > 100) {
             this.valueBalanced = 100;
         } else this.valueBalanced = value;
         return this.valueBalanced;
