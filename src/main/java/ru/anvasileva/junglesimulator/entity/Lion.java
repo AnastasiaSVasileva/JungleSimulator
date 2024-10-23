@@ -11,7 +11,7 @@ public class Lion {
     }
 
     public int getHealth() {
-        return this.health;
+        return health;
     }
 
     public void setEnergy(int energy) {
@@ -19,11 +19,11 @@ public class Lion {
     }
 
     public int getEnergy() {
-        return this.energy;
+        return energy;
     }
 
     public double getFangs() {
-        return this.fangs;
+        return fangs;
     }
 
     public int balanceValue(int value) {
