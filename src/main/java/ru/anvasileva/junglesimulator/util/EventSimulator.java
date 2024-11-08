@@ -35,7 +35,7 @@ public class EventSimulator {
                 eatZebra(lion);
             } else if (eventNumber > 83 && eventNumber <= 90) {
                 attackShram(lion);
-            } else if (eventNumber > 90 && eventNumber <= 100) {
+            } else if (eventNumber > 90 && eventNumber < 100) {
                 runFromHyenas(lion);
             }
             try {
@@ -148,11 +148,7 @@ public class EventSimulator {
     // true - Лев жив, false - Лев ушел на радугу
     private boolean checkStatus(Lion lion) {
         System.out.println("Здоровье: " + lion.getHealth() + ". Энергия: " + lion.getEnergy());
-        if (lion.getHealth() <= 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return lion.getHealth() > 0 ? true : false;
     }
 
     private void checkEnergy(Lion lion) {

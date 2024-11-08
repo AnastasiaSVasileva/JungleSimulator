@@ -3,7 +3,7 @@ package ru.anvasileva.junglesimulator.entity;
 public class Lion {
     private int health = 100;
     private int energy = 100;
-    private final double fangs = 2.5;
+    private final double Fangs = 2.5;
     private int valueBalanced;
 
     public void setHealth(int health) {
@@ -23,16 +23,16 @@ public class Lion {
     }
 
     public double getFangs() {
-        return fangs;
+        return Fangs;
     }
 
     public int balanceValue(int value) {
         if (value < 0) {
-            this.valueBalanced = 0;
+            valueBalanced = 0;
         } else if (value > 100) {
-            this.valueBalanced = 100;
-        } else this.valueBalanced = value;
-        return this.valueBalanced;
+            valueBalanced = 100;
+        } else valueBalanced = value;
+        return valueBalanced;
     }
 
 }
